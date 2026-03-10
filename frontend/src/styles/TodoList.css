@@ -1,0 +1,12 @@
+/* TodoList Component */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .todo-list {
+    gap: 10px;
+  }
+}

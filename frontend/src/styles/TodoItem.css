@@ -1,0 +1,323 @@
+/* TodoItem Component */
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.todo-item.completed .todo-content {
+  opacity: 0.7;
+}
+
+.todo-checkbox {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.todo-checkbox input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+.todo-content {
+  flex: 1;
+}
+
+.todo-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--dark-color);
+  word-break: break-word;
+}
+
+.todo-description {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+  word-break: break-word;
+}
+
+.todo-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.todo-priority {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.priority-low {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.priority-medium {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.priority-high {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.todo-due-date {
+  padding: 4px 10px;
+  background-color: var(--light-color);
+  border-radius: 4px;
+  color: #6b7280;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-save,
+.btn-cancel {
+  padding: 6px 12px;
+  font-size: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+  color: #6b7280;
+}
+
+.btn-edit:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: #f0f4ff;
+}
+
+.btn-delete:hover {
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+  background-color: #fef2f2;
+}
+
+.btn-save {
+  border-color: var(--success-color);
+  color: var(--success-color);
+  background-color: #f0fdf4;
+}
+
+.btn-save:hover {
+  background-color: #e0fce0;
+}
+
+.btn-cancel {
+  border-color: var(--border-color);
+  color: #6b7280;
+}
+
+.btn-cancel:hover {
+  background-color: var(--light-color);
+}
+
+/* Editing State */
+.todo-item.editing {
+  flex-direction: column;
+  padding: 20px;
+}
+
+.edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.edit-title:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.edit-description {
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.edit-description:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.edit-priority {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.edit-priority:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+/* Confirmation Overlay */
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.confirmation-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.confirmation-modal h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--dark-color);
+}
+
+.confirmation-modal p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.warning-text {
+  color: var(--danger-color) !important;
+  font-weight: 600 !important;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.confirmation-actions .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid;
+}
+
+.confirmation-actions .btn-cancel {
+  background-color: white;
+  border-color: #d1d5db;
+  color: #6b7280;
+}
+
+.confirmation-actions .btn-cancel:hover {
+  background-color: #f9fafb;
+}
+
+.confirmation-actions .btn-delete {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+  color: white;
+}
+
+.confirmation-actions .btn-delete:hover {
+  background-color: #dc2626;
+}
+
+.confirmation-actions .btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.confirmation-actions .btn-primary:hover {
+  background-color: #4f46e5;
+}
+
+@media (max-width: 640px) {
+  .todo-item {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .todo-actions {
+    gap: 4px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
