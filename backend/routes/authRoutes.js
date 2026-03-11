@@ -7,7 +7,7 @@ const {
   resendVerificationEmail,
   refreshToken,
   forgotPassword,
-  upadtePassword,
+  updatePassword,
 } = require("../controllers/authController");
 
 router.post("/signup", signup);
@@ -16,6 +16,6 @@ router.post("/verify-email", verifyEmail);
 router.post("/resend-verify-email", resendVerificationEmail);
 router.post("/refresh", refreshToken);
 router.post("/forgotPassword", forgotPassword);
-router.post("/updatePassword", upadtePassword);
+router.post("/updatePassword", updatePassword);
 
 module.exports = router;

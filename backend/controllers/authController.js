@@ -397,7 +397,7 @@ exports.forgotPassword = async(req , res, next)=>{
   }
 }
 
-exports.upadtePassword = async (req, res, next) => {
+exports.updatePassword = async (req, res, next) => {
   try {
      const {newPassword , email} = req.body;
      await User.findOneAndUpdate({ email }, { password: newPassword });
