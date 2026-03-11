@@ -9,19 +9,6 @@ const emailCooldown = new Map();
 // Map<email, { name, email, password, otpHash, otpExpiry }>
 const pendingRegistrations = new Map();
 
-// Helper function to generate tokens
-const generateTokens = (userId) => {
-  const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE || "7d",
-  });
-
-  const refreshToken = jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: process.env.REFRESH_TOKEN_EXPIRE || "30d",
-  });
-
-  return { accessToken, refreshToken };
-};
-
 // @desc    Register user
 // @route   POST /api/auth/signup
 // @access  Public
@@ -120,9 +107,6 @@ exports.login = async (req, res, next) => {
     if (user.password !== password) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-
-    // Generate tokens
-    const { accessToken, refreshToken } = generateTokens(user._id);
 
     res.status(200).json({
       success: true,
